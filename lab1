@@ -1,0 +1,17 @@
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    std::cout << "Enter three values: ";
+    int t1, t2, t3;
+    std::cin >> t1 >> t2 >> t3;
+
+    // Сумарний час для з'їдання пирога
+    double total_time = 1.0 / t1 + 1.0 / t2 + 1.0 / t3;
+
+    std::cout << "Time is needed to eat the pie: ";
+    // Округлення до 2 знаків
+    std::cout << std::fixed << std::setprecision(2) << 1 / total_time << std::endl;
+
+    return 0;
+}
