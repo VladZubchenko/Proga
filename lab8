@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+int countAnagrams(char* word, int length) {
+    // Базовий випадок: якщо слово складається з однієї букви,
+    // то ми можемо сформувати лише одну анаграму
+    if (length == 1)
+        return 1;
+
+    int anagramCount = 0;
+    int used[26] = {0}; // Масив для відстеження використаних букв
+
+    for (int i = 0; i < length; i++) {
+        // Якщо буква вже була використана, пропускаємо її
+        if (used[word[i] - 'A'])
+            continue;
+
+        used[word[i] - 'A'] = 1; // Позначаємо букву як використану
+        char subWord[15];
+        strncpy(subWord, word, i); // Копіюємо підрядок перед поточною буквою
+        strncpy(subWord + i, word + i + 1, length - i); // Копіюємо підрядок після поточної букви
+
+        // Рекурсивно знаходимо кількість анаграм для підрядка
+        anagramCount += countAnagrams(subWord, length - 1);
+    }
+
+    return anagramCount;
+}
+
+int main() {
+    char word[15];
+    printf("Введіть слово: ");
+    scanf("%s", word);
+
+    int length = strlen(word);
+    int anagramCount = countAnagrams(word, length);
+    printf("Кількість анаграм: %d\n", anagramCount);
+
+    return 0;
+}
